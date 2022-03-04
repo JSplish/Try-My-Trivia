@@ -29,9 +29,11 @@ async function sendRequest() {
 //getting question data from api
 //timer interval setup 10s
 //generate question element
+//iterating through questions
 //skateboard+1 increasing difficulty over question iterations
 //generate answer elments
 //logic for checking correct/incorrect ans
+//iterating through questions
 //track score- score is time left on timer (10 pt max)
 //skateboard+1 points will be weighted by difficulty
 //save score in localstorage
