@@ -21,3 +21,21 @@ async function sendRequest() {
     const data = await result.json();
     console.log(data.results);
 }
+
+
+//randomuser data from api
+//randomuser host displayed on homepage
+//on click start button get rid of start button
+//getting question data from api
+//timer interval setup 10s
+//generate question element
+//skateboard+1 increasing difficulty over question iterations
+//generate answer elments
+//logic for checking correct/incorrect ans
+//track score- score is time left on timer (10 pt max)
+//skateboard+1 points will be weighted by difficulty
+//save score in localstorage
+//display score on endgame
+//highscore with input that's a form
+//display highscore
+//play again option
