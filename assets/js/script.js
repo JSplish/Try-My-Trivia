@@ -60,3 +60,18 @@ function useApiResponse(data) {
     `).join('')}
     `;
 }
+
+// Timer
+
+var timeSeconds = 30
+
+timer.innerHTML = timeSeconds;
+
+var countDown = setInterval (()=>{
+    timeSeconds--;
+    timer.innerHTML = timeSeconds;
+    if(timeSeconds < 0){
+        clearInterval(countDown);
+        timer.innerHTML = "TIME OUT!";
+    }
+},1000)
