@@ -1,14 +1,14 @@
 // Mobile
 var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
-var startButton = document.querySelector('#start-button');
+
 var timer = document.querySelector('#time');
 
 burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
-
+var startButton = document.querySelector('#start-button');
 startButton.addEventListener('click', startQuiz);
 
 function startQuiz() {
