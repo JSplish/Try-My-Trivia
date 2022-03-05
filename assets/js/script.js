@@ -3,11 +3,11 @@ var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
 var startButton = document.querySelector('#start-button');
 var timer = document.querySelector('#time');
-var answers = document.querySelector('#answers')
-var question = document.querySelector('#question')
-var helpNav = document.querySelector('#help-nav')
-var scoresNav = document.querySelector('#scores-nav')
-var instructions = document.querySelector('#instructions')
+var answers = document.querySelector('#answers');
+var question = document.querySelector('#question');
+var helpNav = document.querySelector('#help-nav');
+var scoresNav = document.querySelector('#scores-nav');
+var instructions = document.querySelector('#instructions');
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
@@ -19,6 +19,21 @@ function triviaRules() {
     instructions.classList.remove('hide');
         //navbarMenu.classList.toggle('is-active');
 }
+
+// Timer
+
+var timeSeconds = 30
+
+timer.innerHTML = timeSeconds;
+
+var countDown = setInterval (()=>{
+    timeSeconds--;
+    timer.innerHTML = timeSeconds;
+    if(timeSeconds < 0){
+        clearInterval(countDown);
+        timer.innerHTML = "TIME OUT!";
+    }
+},1000)
 
 startButton.addEventListener('click', startQuiz);
 function startQuiz() {
@@ -67,17 +82,4 @@ function useApiResponse(data) {
     `;
 }
 
-// Timer
 
-var timeSeconds = 30
-
-timer.innerHTML = timeSeconds;
-
-var countDown = setInterval (()=>{
-    timeSeconds--;
-    timer.innerHTML = timeSeconds;
-    if(timeSeconds < 0){
-        clearInterval(countDown);
-        timer.innerHTML = "TIME OUT!";
-    }
-},1000)
