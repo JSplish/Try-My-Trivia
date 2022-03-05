@@ -17,8 +17,10 @@ function startQuiz() {
     //un=hide questions section
 }
 
+//generate randomuser as page loads
 window.onload = getRandomUser
 
+//randomuser api fetch
 async function getRandomUser() {
     const apiUrl = 'https://randomuser.me/api/?results=10';
     const result = await fetch(apiUrl);
@@ -26,6 +28,7 @@ async function getRandomUser() {
     console.log(data.results);
 }
 
+//open trivia api fetch
 async function sendRequest() {
     const apiUrl = 'https://opentdb.com/api.php?amount=10';
     const result = await fetch(apiUrl);
@@ -33,19 +36,10 @@ async function sendRequest() {
     console.log(data.results);
     useApiResponse(data.results[0]);
 }
+//load open trivia api data
 sendRequest();
 
-//This function works, but doesn't randomize the answers
-// function useApiResponse(data) {
-//     document.querySelector("#category").innerHTML = `Category: ${data.results[0].category}`
-//     document.querySelector("#difficulty").innerHTML = `Dfficulty: ${data.results[0].difficulty}`
-//     document.querySelector("#question").innerHTML = `Question: ${data.results[0].question}`
-//     document.querySelector("#answer1").innerHTML = data.results[0].correct_answer
-//     document.querySelector("#answer2").innerHTML = data.results[0].incorrect_answers[0]
-//     document.querySelector("#answer3").innerHTML = data.results[0].incorrect_answers[1]
-//     document.querySelector("#answer4").innerHTML = data.results[0].incorrect_answers[2]
-// }
-
+//load questions and and answers and make them random 
 function useApiResponse(data) {
     var correctAnswer = data.correct_answer;
     var incorrectAnswer = data.incorrect_answers;
@@ -56,7 +50,7 @@ function useApiResponse(data) {
     question.innerHTML = `${data.question} <br> <span class = "category">${data.category} </span>`;
     answers.innerHTML = `
         ${optionsList.map((option, index) => `
-            <li> ${index + 1}. <span>${option}</span> </li>
+            <button> ${index + 1}. <span>${option}</span> </button>
     `).join('')}
     `;
 }
