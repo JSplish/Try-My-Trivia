@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Try My Trivia!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-  </head>
+</head>
 
 
-    <body class="has-background-warning">
+<body class="has-background-warning">
+
+    <!-- Navbar -->
+
+    <nav class="navbar is-primary">
+        <div class="navbar-logo">
+            <a class="navbar-item">
+                <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 100px">
+            </a>
+
+            <!-- Menu for Mobile -->
+
+            <a class="navbar-burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
 
         <!-- Navbar -->
 
-        <nav class="navbar is-primary">
-            <div class="navbar-logo">
-                <a class="navbar-item">
-                    <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 100px">
-                </a>
-
-                <!-- Menu for Mobile -->
-
-                <a class="navbar-burger" id="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-            </div>
-
-            <!-- Navbar -->
-
-            <div class="navbar-menu" id="nav-links">
-                <div class="navbar-end">
-                    <a class="navbar-item">INSTRUCTIONS</a>
-                    <a class="navbar-item">SCORES</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Timer -->
-        <div class = "timer">Time: <span id = "time">0</span></div>
-
-        <section class="section">
-            <div class="container">
-                <div id="start-screen" class="start">
-                    <h1 class="title is-size-1 has-text-centered py-6 has-text-weight-bold">
-                        Welcome to Try My Trivia!
-                    </h1>
-                    <div class="subtitle is-size-3 has-text-centered">
-                        <p class="py-2">RANDOM USER: Today you will be Trying My Trivia.</p>
-                        <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
-                        <p class="py-2">Remember each question has a possibility all types of different categories</p>
-                        <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Start Trivia Button -->
-
-        <div class="section">
-            <div class="container">
-                <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-end">
+                <a class="navbar-item">INSTRUCTIONS</a>
+                <a class="navbar-item">SCORES</a>
             </div>
         </div>
+    </nav>
 
-        <!-- Will Need Bulma CSS-->
+    <!-- Timer -->
+    <div class="timer">Time: <span id="time">0</span></div>
 
-        <div id="end-screen" class="hide">
-            <h2>All Done!</h2>
-            <p>Your final score is <span id="final-score"></span>.</p>
-            <p>Enter Initials: <input type= "text" id= "initials" max = "3">
-                <button id="submit">Submit</button>
-            </p>
+    <section class="section">
+        <div class="container">
+            <div id="start-screen" class="start">
+                <h1 class="title is-size-1 has-text-centered py-6 has-text-weight-bold">
+                    Welcome to Try My Trivia!
+                </h1>
+                <div class="subtitle is-size-3 has-text-centered">
+                    <p class="py-2">RANDOM USER: Today you will be Trying My Trivia.</p>
+                    <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
+                    <p class="py-2">Remember each question has a possibility all types of different categories</p>
+                    <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
+                </div>
+            </div>
         </div>
-        <div id="feedback" class="feedback hide"></div>
-        <script src="assets/js/script.js"></script>
-    </body>
+    </section>
+
+    <!-- Start Trivia Button -->
+
+    <div id="start-button" class="section">
+        <div class="container">
+            <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
+        </div>
+    </div>
+
+    <!-- Will Need Bulma CSS-->
+
+    <div id="end-screen" class="hide">
+        <h2>All Done!</h2>
+        <p>Your final score is <span id="final-score"></span>.</p>
+        <p>Enter Initials: <input type="text" id="initials" max="3">
+            <button id="submit">Submit</button>
+        </p>
+    </div>
+    <div id="feedback" class="feedback hide"></div>
+    <script src="assets/js/script.js"></script>
+</body>
+
 </html>

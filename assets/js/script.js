@@ -1,17 +1,22 @@
 // Mobile
 var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
+var startButton = document.querySelector('#start-button');
 var timer = document.querySelector('#time');
 
 burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
+
+startButton.addEventListener('click', startQuiz);
+
 function startQuiz() {
     //hide start screen
     var startScreen = document.getElementById("start-screen");
-        startScreen.setAttribute("class", "hide");
-    
+    startScreen.setAttribute("class", "hide");
+    startButton.setAttribute("class", "hide");
+
     //un=hide questions section
 }
 
