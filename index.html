@@ -32,26 +32,35 @@
 
             <div class="navbar-menu" id="nav-links">
                 <div class="navbar-end">
-                    <a class="navbar-item">INSTRUCTIONS</a>
-                    <a class="navbar-item">SCORES</a>
+                    <a class="navbar-item" id="help-nav">HELP</a>
+                    <div class="hide" id="instructions">
+                        <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
+                        <p class="py-2">Remember each question has a possibility all types of different categories</p>
+                        <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
+                    </div>
+                    <a class="navbar-item" id="scores-nav">SCORES</a>
                 </div>
             </div>
         </nav>
 
+<!-- Will Need Bulma CSS-->
         <!-- Timer -->
-        <div class = "timer">Time: <span id = "time">0</span></div>
 
+        <div class="container">
+            <div class = "timer">Time: <span id = "time">0</span></div>
+        </div>
         <section class="section">
             <div class="container">
                 <div id="start-screen" class="start">
                     <h1 class="title is-size-1 has-text-centered py-6 has-text-weight-bold">
                         Welcome to Try My Trivia!
                     </h1>
+                    
                     <div class="subtitle is-size-3 has-text-centered">
                         <p class="py-2">RANDOM USER: Today you will be Trying My Trivia.</p>
-                        <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
+                        <!-- <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
                         <p class="py-2">Remember each question has a possibility all types of different categories</p>
-                        <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
+                        <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p> -->
                     </div>
                 </div>
             </div>
@@ -65,7 +74,7 @@
             </div>
         </div>
 
-        <!-- Will Need Bulma CSS-->
+<!-- Will Need Bulma CSS-->
 
         <!--Questions and Answers-->
         <div id="question-answers" class="hide">
