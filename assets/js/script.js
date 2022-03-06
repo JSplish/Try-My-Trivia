@@ -1,4 +1,3 @@
-// Mobile
 var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
 var startButton = document.querySelector('#start-button');
@@ -14,15 +13,16 @@ burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
-helpNav.addEventListener('click', triviaRules)
-function triviaRules() {
-    instructions.classList.remove('hide');
-        //navbarMenu.classList.toggle('is-active');
-}
+ helpNav.addEventListener('click', triviaRules)
+    function triviaRules() {
+        instructions.classList.remove('hide');
+        //instructions.classList.add('hide');
+ }
 
 // Timer
 
 var timeSeconds = 30
+var timerId;
 
 timer.innerHTML = timeSeconds;
 
@@ -34,6 +34,7 @@ var countDown = setInterval (()=>{
         timer.innerHTML = "TIME OUT!";
     }
 },1000)
+
 
 startButton.addEventListener('click', startQuiz);
 function startQuiz() {
