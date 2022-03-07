@@ -1,23 +1,28 @@
 var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
-var startButton = document.querySelector('#start-button');
 var timer = document.querySelector('#time');
 var answers = document.querySelector('#answers');
 var question = document.querySelector('#question');
 var helpNav = document.querySelector('#help-nav');
 var scoresNav = document.querySelector('#scores-nav');
 var instructions = document.querySelector('#instructions');
+var startButton = document.querySelector('#start-button');
+var questionAnswerEl = document.querySelector("#question-answers");
+var startScreen = document.querySelector("#start-screen");
+
+
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
- helpNav.addEventListener('click', triviaRules)
-    function triviaRules() {
-        instructions.classList.remove('hide');
-        //instructions.classList.add('hide');
- }
+helpNav.addEventListener('click', triviaRules)
+
+function triviaRules() {
+    instructions.classList.remove('hide');
+    //instructions.classList.add('hide');
+}
 
 // Timer
 
@@ -26,24 +31,29 @@ var timerId;
 
 timer.innerHTML = timeSeconds;
 
-var countDown = setInterval (()=>{
+var countDown = setInterval(() => {
     timeSeconds--;
     timer.innerHTML = timeSeconds;
-    if(timeSeconds < 0){
+    if (timeSeconds < 0) {
         clearInterval(countDown);
         timer.innerHTML = "TIME OUT!";
     }
-},1000)
+}, 1000)
 
+// hide q&a on page load
+questionAnswerEl.setAttribute("class", "hide");
 
+//hide start screen
 startButton.addEventListener('click', startQuiz);
+
 function startQuiz() {
-    //hide start screen
-    var startScreen = document.getElementById("start-screen");
     startScreen.setAttribute("class", "hide");
     startButton.setAttribute("class", "hide");
-    //un=hide questions section
+
+    //un-hide questions section
+    questionAnswerEl.setAttribute("class", "show");
 }
+
 
 //generate randomuser as page loads
 window.onload = getRandomUser
@@ -82,5 +92,3 @@ function useApiResponse(data) {
     `).join('')}
     `;
 }
-
-
