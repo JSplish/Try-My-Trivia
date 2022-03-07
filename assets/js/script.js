@@ -44,7 +44,7 @@ function useApiResponse(data) {
     var correctAnswer = data.correct_answer;
     var incorrectAnswer = data.incorrect_answers;
     var optionsList = incorrectAnswer;
-    optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 1, correctAnswer);
+    optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
     // console.log(optionsList);
     // console.log(correctAnswer);
     question.innerHTML = `
@@ -59,11 +59,11 @@ function useApiResponse(data) {
     
 
     answers.addEventListener("click", function() {
-        console.log(optionsList)
-        // if (correctAnswer) {
-        //     console.log("Correct!")
-        // } else {
-        //     console.log("Incorrect!")
-        // }
+        //console.log(optionsList)
+        if (correctAnswer) {
+            console.log("Correct!")
+        } else {
+            console.log("Incorrect!")
+        }
     })
 }
