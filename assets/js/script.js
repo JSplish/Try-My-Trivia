@@ -9,6 +9,7 @@ var instructions = document.querySelector('#instructions');
 var startButton = document.querySelector('#start-button');
 var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
+var timerId = document.querySelector('#timer-id');
 
 
 
@@ -27,18 +28,20 @@ function triviaRules() {
 // Timer
 
 var timeSeconds = 30
-var timerId;
 
 timer.innerHTML = timeSeconds;
 
-var countDown = setInterval(() => {
-    timeSeconds--;
-    timer.innerHTML = timeSeconds;
-    if (timeSeconds < 0) {
-        clearInterval(countDown);
-        timer.innerHTML = "TIME OUT!";
-    }
-}, 1000)
+function countDown() {
+    var countInterval = setInterval(function() {
+        if (timeSeconds === 0) {
+            clearInterval(countInterval);
+            timer.innerHTML = "Time Out!";
+        } else {
+            timeSeconds--;
+            timer.innerHTML = timeSeconds;
+        }
+    }, 1000);
+}
 
 // hide q&a on page load
 questionAnswerEl.setAttribute("class", "hide");
@@ -52,6 +55,11 @@ function startQuiz() {
 
     //un-hide questions section
     questionAnswerEl.setAttribute("class", "show");
+
+    timerId.setAttribute("class", "show");
+
+    countDown();
+
 }
 
 
@@ -68,9 +76,9 @@ async function getRandomUser() {
 
 //open trivia api fetch
 async function sendRequest() {
-    const apiUrl = 'https://opentdb.com/api.php?amount=10';
-    const result = await fetch(apiUrl);
-    const data = await result.json();
+    let apiUrl = 'https://opentdb.com/api.php?amount=10';
+    let result = await fetch(apiUrl);
+    let data = await result.json();
     console.log(data.results);
     useApiResponse(data.results[0]);
 }
