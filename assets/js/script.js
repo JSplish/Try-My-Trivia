@@ -88,7 +88,7 @@ function useApiResponse(data) {
     question.innerHTML = `${data.question} <br> <span class = "category">${data.category} </span>`;
     answers.innerHTML = `
         ${optionsList.map((option, index) => `
-            <button> ${index + 1}. <span>${option}</span> </button>
+            <button class="button is-info is-large"> ${index + 1}. <span>${option}</span> </button>
     `).join('')}
     `;
 }
