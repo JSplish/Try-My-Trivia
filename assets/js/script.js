@@ -6,10 +6,14 @@ var question = document.querySelector('#question');
 var helpNav = document.querySelector('#help-nav');
 var scoresNav = document.querySelector('#scores-nav');
 var instructions = document.querySelector('#instructions');
+
+var photo = document.querySelector('#photo');
+=======
 var startButton = document.querySelector('#start-button');
 var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
 var timerId = document.querySelector('#timer-id');
+
 
 
 
@@ -68,10 +72,20 @@ window.onload = getRandomUser
 
 //randomuser api fetch
 async function getRandomUser() {
-    const apiUrl = 'https://randomuser.me/api/?results=10';
+    const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
     const data = await result.json();
-    console.log(data.results);
+    console.log(data.results);        
+    
+    data.results.forEach(person => {
+
+        var photo = `<div id="randomUserPhoto">
+        <img src="${person.picture.medium}"
+        </div>`;
+        console.log(photo);
+        $('#randomUserPhoto').append(photo);
+        
+    });
 }
 
 //open trivia api fetch
