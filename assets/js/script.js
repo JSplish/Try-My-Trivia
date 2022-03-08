@@ -7,6 +7,7 @@ var question = document.querySelector('#question');
 var helpNav = document.querySelector('#help-nav');
 var scoresNav = document.querySelector('#scores-nav');
 var instructions = document.querySelector('#instructions');
+var photo = document.querySelector('#photo');
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
@@ -55,6 +56,15 @@ async function getRandomUser() {
     const data = await result.json();
     console.log(data.results);        
     
+    data.results.forEach(person => {
+
+        var photo = `<div id="randomUserPhoto">
+        <img src="${person.picture.medium}"
+        </div>`;
+        console.log(photo);
+        $('#randomUserPhoto').append(photo);
+        
+    });
 }
 
 //open trivia api fetch
