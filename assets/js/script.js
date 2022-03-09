@@ -13,6 +13,8 @@ var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
 var timerId = document.querySelector('#timer-id');
 var endScreen = document.querySelector('#end-screen');
+var accuracy = document.querySelector('#accuracy');
+var points = 0
 
 
 
@@ -79,8 +81,8 @@ async function getRandomUser() {
     const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
     const data = await result.json();
-    console.log(data.results);        
-    
+    console.log(data.results);
+
     data.results.forEach(person => {
         photo.innerHTML = `<img src="${person.picture.large}">`;
         console.log(photo);
@@ -134,7 +136,7 @@ function renderQuestion(index) {
 
 var index = 0
 var questions = []
-//open trivia api fetch
+    //open trivia api fetch
 async function sendRequest() {
     const apiUrl = 'https://opentdb.com/api.php?amount=5';
     const result = await fetch(apiUrl);
@@ -161,25 +163,38 @@ function renderQuestion(data) {
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
             <button data-answer="${option}"> ${index + 1}. ${option} </button>
-    `).join('')}
-    `;
+    `).join('')}`;
+
+    
     var clickCallback = function(event) {
         //console.log(incorrectList)
-        var accuracy = event.target.dataset.answer
+        var checkAnswer = event.target.dataset.answer
         console.log(event.target)
-        if (correctAnswer === accuracy) {
+        if (correctAnswer === checkAnswer) {
             console.log("Correct!")
+            points = points + 10
+            console.log(points);
+            document.getElementById("accuracy").innerHTML="Correct!";
         } else {
             console.log("Incorrect!")
+            document.getElementById("accuracy").innerHTML="Incorrect!";
         }
+        
+        accuracy.setAttribute("class", "show");
+    
+
         answers.removeEventListener("click", clickCallback)
-        nextQuestion();
+        setTimeout(nextQuestion, 2000);
         }
     answers.addEventListener("click", clickCallback);
 }
 
+    // setTimeout(function(){
+    //     accuracy.setAttribute("class", "show");
+    // }, 2000);
 
 function nextQuestion() {
+    document.getElementById("accuracy").innerHTML="";
     index ++
     if (index < 5) {
         renderQuestion(questions.results[index])
