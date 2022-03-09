@@ -1,22 +1,69 @@
-// Mobile
 var burgerIcon = document.querySelector('#burger');
 var navbarMenu = document.querySelector('#nav-links');
 var timer = document.querySelector('#time');
-var answers = document.querySelector("#answers");
-var question = document.querySelector("#question");
-var accuracy = document.querySelector('#accuracy')
+var answers = document.querySelector('#answers');
+var question = document.querySelector('#question');
+var helpNav = document.querySelector('#help-nav');
+var scoresNav = document.querySelector('#scores-nav');
+var instructions = document.querySelector('#instructions');
+var photo = document.querySelector('#photo');
+var startButton = document.querySelector('#start-button');
+var questionAnswerEl = document.querySelector("#question-answers");
+var startScreen = document.querySelector("#start-screen");
+var timerId = document.querySelector('#timer-id');
 
+
+
+
+// Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
-function startQuiz() {
-    //hide start screen
-    var startScreen = document.getElementById("start-screen");
-        startScreen.setAttribute("class", "hide");
-    
-    //un=hide questions section
+helpNav.addEventListener('click', triviaRules)
+
+function triviaRules() {
+    instructions.classList.remove('hide');
+    //instructions.classList.add('hide');
 }
+
+// Timer
+
+var timeSeconds = 30
+
+timer.innerHTML = timeSeconds;
+
+function countDown() {
+    var countInterval = setInterval(function() {
+        if (timeSeconds === 0) {
+            clearInterval(countInterval);
+            timer.innerHTML = "Time Out!";
+        } else {
+            timeSeconds--;
+            timer.innerHTML = timeSeconds;
+        }
+    }, 1000);
+}
+
+// hide q&a on page load
+questionAnswerEl.setAttribute("class", "hide");
+
+//hide start screen
+startButton.addEventListener('click', startQuiz);
+
+function startQuiz() {
+    startScreen.setAttribute("class", "hide");
+    startButton.setAttribute("class", "hide");
+
+    //un-hide questions section
+    questionAnswerEl.setAttribute("class", "show");
+
+    timerId.setAttribute("class", "show");
+
+    countDown();
+
+}
+
 
 //generate randomuser as page loads
 window.onload = getRandomUser
@@ -24,11 +71,21 @@ window.onload = getRandomUser
 
 //randomuser api fetch
 async function getRandomUser() {
-    const apiUrl = 'https://randomuser.me/api/?results=10';
+    const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
     const data = await result.json();
-    console.log(data.results);
-};
+    console.log(data.results);        
+    
+    data.results.forEach(person => {
+
+        var photo = `<div id="randomUserPhoto">
+        <img src="${person.picture.medium}"
+        </div>`;
+        console.log(photo);
+        $('#randomUserPhoto').append(photo);
+        
+    });
+}
 
 async function getQuestions() {
     var response = await fetch("https://opentdb.com/api.php?amount=5");
