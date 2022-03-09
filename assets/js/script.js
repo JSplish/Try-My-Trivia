@@ -16,20 +16,25 @@ var endScreen = document.querySelector('#end-screen');
 var accuracy = document.querySelector('#accuracy');
 var points = 0
 
+var initials = document.querySelector('#initials');
+var submitButton = document.querySelector('#submit');
+var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
+var endScore = document.querySelector("#end-score");
 
 
 
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
-    navbarMenu.classList.toggle('is-active');
+    navbarMenu.classList.toggle;
+    
 });
 
 helpNav.addEventListener('click', triviaRules)
 
 function triviaRules() {
     instructions.classList.remove('hide');
-    //instructions.classList.add('hide');
+    
 }
 
 // Timer
@@ -73,7 +78,7 @@ function startQuiz() {
 
 
 //generate randomuser as page loads
-//window.onload = getRandomUser
+window.onload = getRandomUser
 
 
 //randomuser api fetch
@@ -145,7 +150,7 @@ async function sendRequest() {
     renderQuestion(questions.results[index]);
 }
 //load open trivia api data
-//sendRequest();
+sendRequest();
 
 //load questions and and answers and make them random 
 function renderQuestion(data) {
@@ -173,6 +178,7 @@ function renderQuestion(data) {
         if (correctAnswer === checkAnswer) {
             console.log("Correct!")
             points = points + 10
+            //return points;
             console.log(points);
             document.getElementById("accuracy").innerHTML="Correct!";
         } else {
@@ -202,8 +208,31 @@ function nextQuestion() {
     } else {
         endQuiz()
     }
-
 }
+
+function saveScore() {
+    console.log(highScores)
+    var finalScore = {
+        initials: document.getElementById("initials").value,
+        points: points
+    }
+    highScores.push(finalScore)
+    console.log(highScores)
+    localStorage.setItem("finalScore", JSON.stringify(highScores));
+    displayScores()
+}
+function displayScores() {
+    //document.getElementById("finalScore").style.display = "none";
+    //document.getElementById("display-highscore").style.display = "block";
+    var savedScores = localStorage.getItem("finalScore");
+    savedScores = JSON.parse(savedScores);
+    for (var i = 0; i < savedScores.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = savedScores[i].initials + " " + savedScores[i].points;
+        document.getElementById("highScore").appendChild(li);
+    }
+}
+
 
 function endQuiz() {
     console.log('Quiz has ended')
@@ -214,4 +243,15 @@ function endQuiz() {
     
     endScreen.setAttribute("class", "show")
     
+    //saveScore();
+
+    endScore.textContent = points;
+
+    document.getElementById('submit').addEventListener("click", function() {
+        if (!initials.value) {
+            return
+        }
+        saveScore();
+    })
 }
+
