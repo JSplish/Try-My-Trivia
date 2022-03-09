@@ -33,13 +33,13 @@
 
         <div class="navbar-menu" id="nav-links">
             <div class="navbar-end">
-                <a class="navbar-item" id="help-nav">HELP</a>
-                <div class="hide" id="instructions">
+                <a class="navbar-item has-background-primary" id="help-nav">HELP</a>
+                <div class="hide has-background-primary" id="instructions">
                     <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
                     <p class="py-2">Remember each question has a possibility all types of different categories</p>
                     <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
                 </div>
-                <a class="navbar-item" id="scores-nav">SCORES</a>
+                <a class="navbar-item has-background-primary" id="scores-nav">SCORES</a>
             </div>
         </div>
     </nav>
@@ -101,12 +101,19 @@
         </div>
     </div>
 
-    <div id="end-screen" class="hide">
-        <h2>All Done!</h2>
-        <p>Your final score is <span id="final-score"></span>.</p>
-        <p>Enter Initials: <input type="text" id="initials" max="3">
-            <button id="submit">Submit</button>
-        </p>
+    <section id="finalScore">
+        <div id="end-screen" class="hide">
+            <div class="container"
+                <h2>All Done!</h2>
+                <p>Your final score is <span id="end-score"></span>.</p>
+                <p>Enter Initials: <input type="text" id="initials" max="3" placeholder="Initials">
+                    <button id="submit">Submit</button>
+                </p>
+                <ol id="highScore">
+                
+                </ol>
+            </div>
+    </section>
     </div>
     <div id="feedback" class="feedback hide"></div>
     <script src="assets/js/script.js"></script>
