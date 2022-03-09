@@ -6,10 +6,15 @@ var question = document.querySelector('#question');
 var helpNav = document.querySelector('#help-nav');
 var scoresNav = document.querySelector('#scores-nav');
 var instructions = document.querySelector('#instructions');
+var photo = document.querySelector('#photo');
+var randomName = document.querySelector('#randomName');
 var startButton = document.querySelector('#start-button');
 var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
 var timerId = document.querySelector('#timer-id');
+var endScreen = document.querySelector('#end-screen');
+
+
 
 
 
@@ -28,11 +33,13 @@ function triviaRules() {
 // Timer
 
 var timeSeconds = 30
-
+var countInterval
 timer.innerHTML = timeSeconds;
 
 function countDown() {
-    var countInterval = setInterval(function() {
+    clearInterval(countInterval)
+    timeSeconds = 30
+    countInterval = setInterval(function() {
         if (timeSeconds === 0) {
             clearInterval(countInterval);
             timer.innerHTML = "Time Out!";
@@ -66,73 +73,130 @@ function startQuiz() {
 //generate randomuser as page loads
 //window.onload = getRandomUser
 
+
 //randomuser api fetch
-// async function getRandomUser() {
-//     const apiUrl = 'https://randomuser.me/api/?results=10';
-//     const result = await fetch(apiUrl);
-//     const data = await result.json();
-//     console.log(data.results);
+async function getRandomUser() {
+    const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
+    const result = await fetch(apiUrl);
+    const data = await result.json();
+    console.log(data.results);        
+    
+    data.results.forEach(person => {
+        photo.innerHTML = `<img src="${person.picture.large}">`;
+        console.log(photo);
+        randomName.innerHTML = `Hi, my name is ${person.name.first}. Today you will be trying my trivia!`
+    });
+}
+
+// async function getQuestions() {
+//     var response = await fetch("https://opentdb.com/api.php?amount=5");
+//     var data = await response.json();
+//     return data
 // }
 
-//open trivia api fetch
-// async function sendRequest() {
-//     let apiUrl = 'https://opentdb.com/api.php?amount=10';
-//     let result = await fetch(apiUrl);
-//     let data = await result.json();
-//     console.log(data.results);
-//     useApiResponse(data.results[0]);
+// function randomizeAnswers(arr) {
+//     for (var i = arr.length - 1; i >= 0; i--) {
+//         var s = Math.floor(Math.random() * (i + 1));
+//         [arr[i], arr[s]] = [arr[s], arr[i]];
+//     }
 // }
+
+// getQuestions().then((data) => {
+//     var results = data.results[index];
+//     console.log(results);
+//     document.getElementById('question').innerHTML = results.question;
+//     var answers = [...results.incorrect_answers, results.correct_answer];
+//     randomizeAnswers(answers);
+//     for (var i = 0; i < 4; i++) {
+//         var index = i + 1;
+//         document.getElementById(`choice${index}label`).innerHTML = answers[i];
+//         document.getElementById(`choice${index}`).value = answers[i];
+//     }
+
+//     document.getElementById('guess').addEventListener('click', () => {
+//         document.querySelectorAll('input[name="choice"]').forEach((el) => {
+//             var accuracy = document.getElementById('accuracy');
+//             if(el.checked){
+//                 console.log(el.value);
+//                 console.log(results.correct_answer);
+
+//                 if(el.value === results.correct_answer) {
+//                     accuracy.innerHTML = "Good job!"
+//                 } else accuracy.innerHTML = `Sorry! The correct answer is ${results.correct_answer}`;
+//             } 
+//         });
+//     });
+// });
+
+function renderQuestion(index) {
+
+}
+
+var index = 0
+var questions = []
+//open trivia api fetch
+async function sendRequest() {
+    const apiUrl = 'https://opentdb.com/api.php?amount=5';
+    const result = await fetch(apiUrl);
+    questions = await result.json();
+    console.log(questions.results);
+    renderQuestion(questions.results[index]);
+}
 //load open trivia api data
 //sendRequest();
 
 //load questions and and answers and make them random 
-// function useApiResponse(data) {
-//     var correctAnswer = data.correct_answer;
-//     var incorrectAnswer = data.incorrect_answers;
-//     var optionsList = incorrectAnswer;
-//     optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
-    // console.log(optionsList);
+function renderQuestion(data) {
+    var correctAnswer = data.correct_answer;
+    var incorrectAnswer = data.incorrect_answers;
+    var incorrectList = incorrectAnswer;
+    incorrectList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
+    // console.log(incorrectList);
     // console.log(correctAnswer);
-//     question.innerHTML = `${data.question} <br> <span class = "category">${data.category} </span>`;
-//     answers.innerHTML = `
-//         ${optionsList.map((option, index) => `
-//             <button class="button is-info is-large"> ${index + 1}. <span>${option}</span> </button>
-//     `).join('')}
-//     `;
-// }
 
- function useApiDate (data) {
-     document.querySelector("#category").innerHTML = `Category: ${data.results[0].category}`
-     document.querySelector("#difficulty").innerHTML = `Difficulty: ${data.results}[0].difficulty}`
-     document.querySelector("#question").innerHTML = `Question: ${data.results[0].question}`
-     document.querySelector("#answer1").innerHTML = data.results[0].correct_answer
-     document.querySelector("#answer2").innerHTML = data.results[0].incorrect_answer[0]
-     document.querySelector("#answer3").innerHTML = data.results[0].incorrect_answer[1]
-     document.querySelector("#answer4").innerHTML = data.results[0].incorrect_answer[2]
- }
+    question.innerHTML = `
+        ${data.question} <br> 
+        <span class = "category">Catagory: ${data.category} </span> <br> 
+        <span class = "difficulty">Difficulty: ${data.difficulty} </span>`;
+    answers.innerHTML = `
+        ${incorrectList.map((option, index) => `
+            <button data-answer="${option}"> ${index + 1}. ${option} </button>
+    `).join('')}
+    `;
+    var clickCallback = function(event) {
+        //console.log(incorrectList)
+        var accuracy = event.target.dataset.answer
+        console.log(event.target)
+        if (correctAnswer === accuracy) {
+            console.log("Correct!")
+        } else {
+            console.log("Incorrect!")
+        }
+        answers.removeEventListener("click", clickCallback)
+        nextQuestion();
+        }
+    answers.addEventListener("click", clickCallback);
+}
 
- let correctButton = document.querySelector("answer1")
 
- correctButton.addEventListener("click", ()=>{
-     document.querySelector("answer1").innerHTML = "CORRECT!";
-     sendRequest();
+function nextQuestion() {
+    index ++
+    if (index < 5) {
+        renderQuestion(questions.results[index])
+        countDown()
+    } else {
+        endQuiz()
+    }
 
- })
+}
 
-// const _question = document.getElementById('question');
-// const _options = document.querySelector('.quiz-options');
+function endQuiz() {
+    console.log('Quiz has ended')
 
-// async function loadQuestion() {
-//     const APIUrl = "https://opentdb.com/api.php?amount=5";
-//     const result = await fetch(`${APIUrl}`);
-//     const data = await result.json();
-//     //console.log(data.results);
-//     showQuestion(data.results);
-// }
+    questionAnswerEl.setAttribute("class", "hide");
 
-// function showQuestion(data){
-//     let correctAnswer = data.correct_answer;
-//     console.log(correctAnswer);
-// }
-
-// loadQuestion();
+    timerId.setAttribute("class", "hide");
+    
+    endScreen.setAttribute("class", "show")
+    
+}

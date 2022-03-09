@@ -58,9 +58,12 @@
                     Welcome to Try My Trivia!
                 </h1>
 
+
                 <div class="subtitle is-size-3 has-text-centered">
-                    <p class="py-2">RANDOM USER: Today you will be Trying My Trivia.</p>
+                    <div id="photo"></div>
+                    <p class="py-2" id="randomName"></p>
                     <!-- <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
+
                         <p class="py-2">Remember each question has a possibility all types of different categories</p>
                         <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p> -->
                 </div>
@@ -77,29 +80,26 @@
     </div>
 
     <!-- Will Need Bulma CSS-->
-
-    <!--Questions and Answers-->
-    <div class="quiz-body container has-text-centered is-size-1">
-        <h2 class = "quiz-question" id = "question"></h2>
-        <ul class = "quiz-options">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <!-- <div id="question-answers"> -->
-            <!-- Hard Coded until API is working -->
-                <!-- <p id="category"></p>
-                <p id="difficulty"></p>
+        <!--Questions and Answers-->
+        <div class="container has-text-centered is-size-1">
+        <div id="question-answers">
             <h2 id="question"></h2>
-            <button id="answer1"></button>
-            <button id="answer2"></button>
-            <button id="answer3"></button>
-            <button id="answer4"></button> -->
-        <div id = "result">
-            <!-- Results Here -->
+            <div id="answers">
+                <!-- <input type="radio" id="choice1" name="choice" value="">
+                <label for="choice1" id="choice1label"></label>
+                <input type="radio" id="choice2" name="choice" value="">
+                <label for="choice2" id="choice2label"></label>
+                <input type="radio" id="choice3" name="choice" value="">
+                <label for="choice3" id="choice3label"></label>
+                <input type="radio" id="choice4" name="choice" value="">
+                <label for="choice4" id="choice4label"></label> -->
+            </div>
+           <!-- <div>
+               <button id="guess">Guess!</button>
+           </div>
+           <h1 id="accuracy"></h1> -->
+          </div>
         </div>
-    </div>
 
     <div id="end-screen" class="hide">
         <h2>All Done!</h2>
