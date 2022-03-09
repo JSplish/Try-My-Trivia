@@ -7,6 +7,7 @@ var helpNav = document.querySelector('#help-nav');
 var scoresNav = document.querySelector('#scores-nav');
 var instructions = document.querySelector('#instructions');
 var photo = document.querySelector('#photo');
+var randomName = document.querySelector('#randomName');
 var startButton = document.querySelector('#start-button');
 var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
@@ -77,13 +78,9 @@ async function getRandomUser() {
     console.log(data.results);        
     
     data.results.forEach(person => {
-
-        var photo = `<div id="randomUserPhoto">
-        <img src="${person.picture.medium}"
-        </div>`;
+        photo.innerHTML = `<img src="${person.picture.large}">`;
         console.log(photo);
-        $('#randomUserPhoto').append(photo);
-        
+        randomName.innerHTML = `Hi, my name is ${person.name.first}. Today you will be trying my trivia!`
     });
 }
 
