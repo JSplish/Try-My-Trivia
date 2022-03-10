@@ -20,15 +20,16 @@ var initials = document.querySelector('#initials');
 var submitButton = document.querySelector('#submit');
 var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
 var endScore = document.querySelector("#end-score");
-
+var photoAPI = document.querySelector('#photoAPI');
 
 
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
-    navbarMenu.classList.toggle;
-
+    navbarMenu.classList.toggle('is-active');
 });
+
+
 
 helpNav.addEventListener('click', triviaRules)
 
@@ -49,7 +50,8 @@ function countDown() {
     countInterval = setInterval(function() {
         if (timeSeconds === 0) {
             clearInterval(countInterval);
-            timer.innerHTML = "Time Out!";
+            timer.innerHTML = "Expired!";
+            nextQuestion();
         } else {
             timeSeconds--;
             timer.innerHTML = timeSeconds;
@@ -79,11 +81,10 @@ function startQuiz() {
 
 //generate randomuser as page loads
 window.onload = getRandomUser
-
+var apiUrl = 'https://randomuser.me/api/?inc=name,picture';
 var data = []
 //randomuser api fetch
 async function getRandomUser() {
-    const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
     data = await result.json();
     console.log(data.results);
@@ -91,7 +92,7 @@ async function getRandomUser() {
     data.results.forEach(person => {
         photo.innerHTML = `<img src="${person.picture.large}">`;
         console.log(photo);
-        randomName.innerHTML = `Hi, my name is ${person.name.first}. Today you will be trying my trivia!`
+        randomName.innerHTML = `"Hi, my name is ${person.name.first}. Today you will be trying my trivia!"`
     });
 }
 
@@ -117,14 +118,14 @@ function renderQuestion(data) {
     incorrectList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
     // console.log(incorrectList);
     // console.log(correctAnswer);
-
+    //photoAPI.innerHTML =`<img src="${person.picture.large}">`;
     question.innerHTML = `
-        <span class = "category is-size-4">Category: ${data.category} </span> <br>
-        <span class = "difficulty is-size-6">Difficulty: ${data.difficulty} </span> <br> 
+        <span class = "category is-size-3">Category - ${data.category} </span> <br>
+        <span class = "difficulty is-size-3">Difficulty - ${data.difficulty} </span> <br> 
         ${data.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
-            <button class="my-6 button is-info is-rounded" data-answer="${option}"> ${index + 1}. ${option} </button>
+            <button class="my-6 button is-info is-rounded is-large" data-answer="${option}"> ${index + 1}. ${option} </button>
     `).join('')}`;
 
     
@@ -137,17 +138,17 @@ function renderQuestion(data) {
             points = points + 10
             //return points;
             console.log(points);
-            document.getElementById("accuracy").innerHTML="Correct!";
+            document.getElementById("accuracy").innerHTML="WOWZERS! You are smart! 😃 ";
         } else {
             console.log("Incorrect!")
-            document.getElementById("accuracy").innerHTML="Incorrect!";
+            document.getElementById("accuracy").innerHTML="Incorrect! 🤪 The correct answer is " + correctAnswer;
         }
         
         accuracy.setAttribute("class", "show");
     
 
         answers.removeEventListener("click", clickCallback)
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 1500);
         }
     answers.addEventListener("click", clickCallback);
 }
@@ -187,7 +188,7 @@ function displayScores() {
     savedScores = JSON.parse(savedScores);
     for (var i = 0; i < savedScores.length; i++) {
         var li = document.createElement("li");
-        li.textContent = savedScores[i].initials + " " + savedScores[i].points;
+        li.textContent = savedScores[i].initials + " - " + savedScores[i].points + " points";
         document.getElementById("highScore").appendChild(li);
     }
 }
@@ -213,3 +214,14 @@ function endQuiz() {
         saveScore();
     })
 }
+
+
+// readme
+// complete presentation and assign speaking roles
+// clean code
+// fix what the help button says
+// deploy links
+// Fix help button to hide after shown
+// display score throughout game
+// score = time. if we have time...which equals score.
+// category and difficulty differences between question
