@@ -83,7 +83,7 @@ function startQuiz() {
 window.onload = getRandomUser
 var apiUrl = 'https://randomuser.me/api/?inc=name,picture';
 var data = []
-//randomuser api fetch
+    //randomuser api fetch
 async function getRandomUser() {
     const result = await fetch(apiUrl);
     data = await result.json();
@@ -225,3 +225,4 @@ function endQuiz() {
 // display score throughout game
 // score = time. if we have time...which equals score.
 // category and difficulty differences between question
+//comment
