@@ -1,10 +1,10 @@
 body {
-    height: 100vh;
+    height: 100%;
 }
 
 .hide {
     display: none;
-} 
+}
 
 .show {
     display: block;
@@ -16,4 +16,8 @@ input {
     height: 50px;
     width: 200px;
     font-size: large;
+}
+
+.show-inline {
+    display: inline-block;
 }

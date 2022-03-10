@@ -21,6 +21,7 @@ var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
 var endScore = document.querySelector("#end-score");
 var photoAPI = document.querySelector('#photoAPI');
 var currentScore = document.querySelector('#current-score');
+var playAgainButton = document.querySelector("#play-again");
 // var questionDifficulty = "";
 
 
@@ -138,10 +139,10 @@ function renderQuestion(questionData) {
     
     var clickCallback = function(event) {
         //console.log(incorrectList)
-        var checkAnswer = event.target.dataset.answer
-        console.log(event.target)
+        var checkAnswer = event.target.dataset.answer;
+        console.log(event.target);
         if (correctAnswer === checkAnswer) {
-            console.log("Correct!")
+            console.log("Correct!");
             
             if (questionData.difficulty === "medium"){
                 points = timeSeconds * 2;
@@ -169,9 +170,9 @@ function renderQuestion(questionData) {
         accuracy.setAttribute("class", "show");
     
 
-        answers.removeEventListener("click", clickCallback)
+        answers.removeEventListener("click", clickCallback);
         setTimeout(nextQuestion, 1500);
-        }
+    }
     answers.addEventListener("click", clickCallback);
 }
 
@@ -191,6 +192,7 @@ function nextQuestion() {
 }
 
 function saveScore() {
+    playAgainButton.setAttribute("class","button is-info is-rounded is-medium mb-5 show-inline");
     console.log(highScores)
     var finalScore = {
         initials: document.getElementById("initials").value,
@@ -238,6 +240,11 @@ function endQuiz() {
         saveScore();
     })
 }
+
+var reload = function(){
+    window.location.reload();
+}
+playAgainButton.addEventListener("click", reload);
 
 
 // readme
