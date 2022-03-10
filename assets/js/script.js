@@ -15,13 +15,13 @@ var timerId = document.querySelector('#timer-id');
 var endScreen = document.querySelector('#end-screen');
 var accuracy = document.querySelector('#accuracy');
 var points = 0
-
 var initials = document.querySelector('#initials');
 var submitButton = document.querySelector('#submit');
 var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
 var endScore = document.querySelector("#end-score");
 var photoAPI = document.querySelector('#photoAPI');
 var currentScore = document.querySelector('#current-score');
+// var questionDifficulty = "";
 
 
 helpNav.addEventListener('click', triviaRules);
@@ -142,7 +142,18 @@ function renderQuestion(questionData) {
         console.log(event.target)
         if (correctAnswer === checkAnswer) {
             console.log("Correct!")
-            points = points + timeSeconds;
+            
+            if (questionData.difficulty === "medium"){
+                points = timeSeconds * 2;
+                console.log("2x pts");
+            }
+            else if (questionData.difficulty === "hard"){
+                points = timeSeconds * 3;
+                console.log("3x pts");
+            }
+            else {
+                points = points + timeSeconds;
+            }
             
             currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
             //return points;
@@ -204,7 +215,8 @@ function displayScores() {
 
 
 function endQuiz() {
-    console.log('Quiz has ended')
+    // console.log('Quiz has ended')
+    clearInterval(countInterval);
 
     questionAnswerEl.setAttribute("class", "hide");
 
