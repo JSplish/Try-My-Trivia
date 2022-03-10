@@ -127,7 +127,7 @@ function renderQuestion(questionData) {
     photoAPI.innerHTML = `<img src="${personImage}">`;
     question.innerHTML = `
         <span class = "category is-size-3">Category - ${questionData.category} </span> <br>
-        <span class = "difficulty is-size-3">Difficulty - ${questionData.difficulty} </span> <br> 
+        <span class = "difficulty is-size-3 is-capitalized">Difficulty - ${questionData.difficulty} </span> <br> <hr class="has-background-dark">
         ${questionData.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
@@ -153,12 +153,14 @@ function renderQuestion(questionData) {
             }
             else {
                 points = points + timeSeconds;
+                console.log("1x points");
             }
             
             currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
             //return points;
             // console.log(points);
             document.getElementById("accuracy").innerHTML="WOWZERS! You are smart! 😃 ";
+
         } else {
             console.log("Incorrect!")
             document.getElementById("accuracy").innerHTML="Incorrect! 🤪 The correct answer is " + correctAnswer;
@@ -208,6 +210,7 @@ function displayScores() {
     savedScores = JSON.parse(savedScores);
     for (var i = 0; i < savedScores.length; i++) {
         var li = document.createElement("li");
+        li.setAttribute("class","has-text-weight-normal is-size-");
         li.textContent = savedScores[i].initials + " - " + savedScores[i].points + " points";
         document.getElementById("highScore").appendChild(li);
     }
