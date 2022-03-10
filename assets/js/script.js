@@ -23,6 +23,17 @@ var endScore = document.querySelector("#end-score");
 var photoAPI = document.querySelector('#photoAPI');
 
 
+helpNav.addEventListener('click', triviaRules);
+
+function triviaRules() {
+    if (instructions.style.display === "none") {
+        instructions.style.display = "block";
+        // instructions.classList.remove('hide');
+    } else {
+        instructions.style.display = "none";
+    }
+
+}
 
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
@@ -30,13 +41,6 @@ burgerIcon.addEventListener('click', () => {
 });
 
 
-
-helpNav.addEventListener('click', triviaRules)
-
-function triviaRules() {
-    instructions.classList.remove('hide');
-
-}
 
 // Timer
 
@@ -83,6 +87,7 @@ function startQuiz() {
 window.onload = getRandomUser
 var apiUrl = 'https://randomuser.me/api/?inc=name,picture';
 var data = []
+var personImage;
 //randomuser api fetch
 async function getRandomUser() {
     const result = await fetch(apiUrl);
@@ -90,8 +95,9 @@ async function getRandomUser() {
     console.log(data.results);
 
     data.results.forEach(person => {
+        personImage = person.picture.large;
         photo.innerHTML = `<img src="${person.picture.large}">`;
-        console.log(photo);
+        // console.log(photo);
         randomName.innerHTML = `"Hi, my name is ${person.name.first}. Today you will be trying my trivia!"`
     });
 }
@@ -111,18 +117,17 @@ async function sendRequest() {
 sendRequest();
 
 //load questions and and answers and make them random 
-function renderQuestion(data) {
-    var correctAnswer = data.correct_answer;
-    var incorrectAnswer = data.incorrect_answers;
+function renderQuestion(questionData) {
+    var correctAnswer = questionData.correct_answer;
+    var incorrectAnswer = questionData.incorrect_answers;
     var incorrectList = incorrectAnswer;
     incorrectList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
     // console.log(incorrectList);
-    // console.log(correctAnswer);
-    //photoAPI.innerHTML =`<img src="${person.picture.large}">`;
+    photoAPI.innerHTML = `<img src="${personImage}">`;
     question.innerHTML = `
-        <span class = "category is-size-3">Category - ${data.category} </span> <br>
-        <span class = "difficulty is-size-3">Difficulty - ${data.difficulty} </span> <br> 
-        ${data.question} `;
+        <span class = "category is-size-3">Category - ${questionData.category} </span> <br>
+        <span class = "difficulty is-size-3">Difficulty - ${questionData.difficulty} </span> <br> 
+        ${questionData.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
             <button class="my-6 button is-info is-rounded is-large" data-answer="${option}"> ${index + 1}. ${option} </button>
