@@ -13,8 +13,14 @@ var questionAnswerEl = document.querySelector("#question-answers");
 var startScreen = document.querySelector("#start-screen");
 var timerId = document.querySelector('#timer-id');
 var endScreen = document.querySelector('#end-screen');
+var accuracy = document.querySelector('#accuracy');
+var points = 0
 
-
+var initials = document.querySelector('#initials');
+var submitButton = document.querySelector('#submit');
+var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
+var endScore = document.querySelector("#end-score");
+var photoAPI = document.querySelector('#photoAPI');
 
 
 
@@ -23,31 +29,29 @@ burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
 });
 
+
+
 helpNav.addEventListener('click', triviaRules)
 
 function triviaRules() {
-    if (instructions.style.display === "none") {
-        instructions.style.display = "block";
-    } else {
-        instructions.style.display = "none";
-    }
-    //instructions.classList.remove('hide');
-    //instructions.classList.add('hide');
+    instructions.classList.remove('hide');
+
 }
 
 // Timer
 
-var timeSeconds = 30
-var countInterval
+var timeSeconds = 11
+var countInterval;
 timer.innerHTML = timeSeconds;
 
 function countDown() {
     clearInterval(countInterval)
-    timeSeconds = 30
+    timeSeconds = 11
     countInterval = setInterval(function() {
         if (timeSeconds === 0) {
             clearInterval(countInterval);
-            timer.innerHTML = "Time Out!";
+            timer.innerHTML = "Expired!";
+            nextQuestion();
         } else {
             timeSeconds--;
             timer.innerHTML = timeSeconds;
@@ -77,69 +81,25 @@ function startQuiz() {
 
 //generate randomuser as page loads
 window.onload = getRandomUser
-
-
+var apiUrl = 'https://randomuser.me/api/?inc=name,picture';
+var data = []
 //randomuser api fetch
 async function getRandomUser() {
-    const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
-    const data = await result.json();
-    console.log(data.results);        
-    
+    data = await result.json();
+    console.log(data.results);
+
     data.results.forEach(person => {
         photo.innerHTML = `<img src="${person.picture.large}">`;
         console.log(photo);
-        randomName.innerHTML = `Hi, my name is ${person.name.first}. Today you will be trying my trivia!`
+        randomName.innerHTML = `"Hi, my name is ${person.name.first}. Today you will be trying my trivia!"`
     });
 }
 
-// async function getQuestions() {
-//     var response = await fetch("https://opentdb.com/api.php?amount=5");
-//     var data = await response.json();
-//     return data
-// }
-
-// function randomizeAnswers(arr) {
-//     for (var i = arr.length - 1; i >= 0; i--) {
-//         var s = Math.floor(Math.random() * (i + 1));
-//         [arr[i], arr[s]] = [arr[s], arr[i]];
-//     }
-// }
-
-// getQuestions().then((data) => {
-//     var results = data.results[index];
-//     console.log(results);
-//     document.getElementById('question').innerHTML = results.question;
-//     var answers = [...results.incorrect_answers, results.correct_answer];
-//     randomizeAnswers(answers);
-//     for (var i = 0; i < 4; i++) {
-//         var index = i + 1;
-//         document.getElementById(`choice${index}label`).innerHTML = answers[i];
-//         document.getElementById(`choice${index}`).value = answers[i];
-//     }
-
-//     document.getElementById('guess').addEventListener('click', () => {
-//         document.querySelectorAll('input[name="choice"]').forEach((el) => {
-//             var accuracy = document.getElementById('accuracy');
-//             if(el.checked){
-//                 console.log(el.value);
-//                 console.log(results.correct_answer);
-
-//                 if(el.value === results.correct_answer) {
-//                     accuracy.innerHTML = "Good job!"
-//                 } else accuracy.innerHTML = `Sorry! The correct answer is ${results.correct_answer}`;
-//             } 
-//         });
-//     });
-// });
-
-function renderQuestion(index) {
-
-}
 
 var index = 0
 var questions = []
-//open trivia api fetch
+    //open trivia api fetch
 async function sendRequest() {
     const apiUrl = 'https://opentdb.com/api.php?amount=5';
     const result = await fetch(apiUrl);
@@ -158,33 +118,47 @@ function renderQuestion(data) {
     incorrectList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
     // console.log(incorrectList);
     // console.log(correctAnswer);
-
+    //photoAPI.innerHTML =`<img src="${person.picture.large}">`;
     question.innerHTML = `
-        ${data.question} <br> 
-        <span class = "category">Catagory: ${data.category} </span> <br> 
-        <span class = "difficulty">Difficulty: ${data.difficulty} </span>`;
+        <span class = "category is-size-3">Category - ${data.category} </span> <br>
+        <span class = "difficulty is-size-3">Difficulty - ${data.difficulty} </span> <br> 
+        ${data.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
-            <button data-answer="${option}"> ${index + 1}. ${option} </button>
-    `).join('')}
-    `;
+            <button class="my-6 button is-info is-rounded is-large" data-answer="${option}"> ${index + 1}. ${option} </button>
+    `).join('')}`;
+
+    
     var clickCallback = function(event) {
         //console.log(incorrectList)
-        var accuracy = event.target.dataset.answer
+        var checkAnswer = event.target.dataset.answer
         console.log(event.target)
-        if (correctAnswer === accuracy) {
+        if (correctAnswer === checkAnswer) {
             console.log("Correct!")
+            points = points + 10
+            //return points;
+            console.log(points);
+            document.getElementById("accuracy").innerHTML="WOWZERS! You are smart! 😃 ";
         } else {
             console.log("Incorrect!")
+            document.getElementById("accuracy").innerHTML="Incorrect! 🤪 The correct answer is " + correctAnswer;
         }
+        
+        accuracy.setAttribute("class", "show");
+    
+
         answers.removeEventListener("click", clickCallback)
-        nextQuestion();
+        setTimeout(nextQuestion, 1500);
         }
     answers.addEventListener("click", clickCallback);
 }
 
+    // setTimeout(function(){
+    //     accuracy.setAttribute("class", "show");
+    // }, 2000);
 
 function nextQuestion() {
+    document.getElementById("accuracy").innerHTML="";
     index ++
     if (index < 5) {
         renderQuestion(questions.results[index])
@@ -192,8 +166,33 @@ function nextQuestion() {
     } else {
         endQuiz()
     }
-
 }
+
+function saveScore() {
+    console.log(highScores)
+    var finalScore = {
+        initials: document.getElementById("initials").value,
+        points: points
+    }
+    highScores.push(finalScore)
+    console.log(highScores)
+    localStorage.setItem("finalScore", JSON.stringify(highScores));
+    displayScores();
+    submitButton.disabled = true;
+}
+
+function displayScores() {
+    //document.getElementById("finalScore").style.display = "none";
+    //document.getElementById("display-highscore").style.display = "block";
+    var savedScores = localStorage.getItem("finalScore");
+    savedScores = JSON.parse(savedScores);
+    for (var i = 0; i < savedScores.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = savedScores[i].initials + " - " + savedScores[i].points + " points";
+        document.getElementById("highScore").appendChild(li);
+    }
+}
+
 
 function endQuiz() {
     console.log('Quiz has ended')
@@ -204,4 +203,25 @@ function endQuiz() {
     
     endScreen.setAttribute("class", "show")
     
+    //saveScore();
+
+    endScore.textContent = points;
+
+    document.getElementById('submit').addEventListener("click", function() {
+        if (!initials.value) {
+            return
+        }
+        saveScore();
+    })
 }
+
+
+// readme
+// complete presentation and assign speaking roles
+// clean code
+// fix what the help button says
+// deploy links
+// Fix help button to hide after shown
+// display score throughout game
+// score = time. if we have time...which equals score.
+// category and difficulty differences between question
