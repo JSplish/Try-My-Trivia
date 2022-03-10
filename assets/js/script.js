@@ -142,7 +142,8 @@ function renderQuestion(questionData) {
         console.log(event.target)
         if (correctAnswer === checkAnswer) {
             console.log("Correct!")
-            points = points + 10
+            points = points + timeSeconds;
+            
             currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
             //return points;
             // console.log(points);
