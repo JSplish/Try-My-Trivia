@@ -80,12 +80,12 @@ function startQuiz() {
 //generate randomuser as page loads
 window.onload = getRandomUser
 
-
+var data = []
 //randomuser api fetch
 async function getRandomUser() {
     const apiUrl = 'https://randomuser.me/api/?inc=name,picture';
     const result = await fetch(apiUrl);
-    const data = await result.json();
+    data = await result.json();
     console.log(data.results);
 
     data.results.forEach(person => {
@@ -95,11 +95,6 @@ async function getRandomUser() {
     });
 }
 
-
-
-function renderQuestion(index) {
-
-}
 
 var index = 0
 var questions = []
