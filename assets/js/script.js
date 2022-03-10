@@ -39,13 +39,13 @@ function triviaRules() {
 
 // Timer
 
-var timeSeconds = 30
-var countInterval
+var timeSeconds = 11
+var countInterval;
 timer.innerHTML = timeSeconds;
 
 function countDown() {
     clearInterval(countInterval)
-    timeSeconds = 30
+    timeSeconds = 11
     countInterval = setInterval(function() {
         if (timeSeconds === 0) {
             clearInterval(countInterval);
@@ -219,8 +219,10 @@ function saveScore() {
     highScores.push(finalScore)
     console.log(highScores)
     localStorage.setItem("finalScore", JSON.stringify(highScores));
-    displayScores()
+    displayScores();
+    submitButton.disabled = true;
 }
+
 function displayScores() {
     //document.getElementById("finalScore").style.display = "none";
     //document.getElementById("display-highscore").style.display = "block";
