@@ -21,6 +21,7 @@ var submitButton = document.querySelector('#submit');
 var highScores = JSON.parse(localStorage.getItem("finalScore")) || [];
 var endScore = document.querySelector("#end-score");
 var photoAPI = document.querySelector('#photoAPI');
+var currentScore = document.querySelector('#current-score');
 
 
 helpNav.addEventListener('click', triviaRules);
@@ -133,6 +134,7 @@ function renderQuestion(questionData) {
             <button class="my-6 button is-info is-rounded is-large" data-answer="${option}"> ${index + 1}. ${option} </button>
     `).join('')}`;
 
+    currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
     
     var clickCallback = function(event) {
         //console.log(incorrectList)
@@ -141,8 +143,9 @@ function renderQuestion(questionData) {
         if (correctAnswer === checkAnswer) {
             console.log("Correct!")
             points = points + 10
+            currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
             //return points;
-            console.log(points);
+            // console.log(points);
             document.getElementById("accuracy").innerHTML="WOWZERS! You are smart! 😃 ";
         } else {
             console.log("Incorrect!")
