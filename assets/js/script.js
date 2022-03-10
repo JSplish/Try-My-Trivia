@@ -193,14 +193,27 @@ function nextQuestion() {
 
 function saveScore() {
     playAgainButton.setAttribute("class","button is-info is-rounded is-medium mb-5 show-inline");
-    console.log(highScores)
+    // console.log(highScores)
     var finalScore = {
         initials: document.getElementById("initials").value,
         points: points
     }
     highScores.push(finalScore)
-    console.log(highScores)
-    localStorage.setItem("finalScore", JSON.stringify(highScores));
+    // highScores.push({initials: 'same score', points: 11})
+    
+    var mostRecentLast10Scores = highScores.sort((score1, score2)=> {
+        if (score1.points < score2.points) {
+            return 1
+        } else if (score1.points > score2.points) {
+            return -1
+        } else {
+            return 0
+        }
+    });
+console.log(mostRecentLast10Scores);
+     mostRecentLast10Scores = mostRecentLast10Scores.slice(0,10);
+    localStorage.setItem("finalScore", JSON.stringify(mostRecentLast10Scores));
+    console.log(mostRecentLast10Scores);
     displayScores();
     submitButton.disabled = true;
 }
