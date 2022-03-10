@@ -27,14 +27,14 @@ var endScore = document.querySelector("#end-score");
 // Menu button for mobile to show 'help' and 'scores'
 burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle;
-    
+
 });
 
 helpNav.addEventListener('click', triviaRules)
 
 function triviaRules() {
     instructions.classList.remove('hide');
-    
+
 }
 
 // Timer
@@ -95,45 +95,7 @@ async function getRandomUser() {
     });
 }
 
-// async function getQuestions() {
-//     var response = await fetch("https://opentdb.com/api.php?amount=5");
-//     var data = await response.json();
-//     return data
-// }
 
-// function randomizeAnswers(arr) {
-//     for (var i = arr.length - 1; i >= 0; i--) {
-//         var s = Math.floor(Math.random() * (i + 1));
-//         [arr[i], arr[s]] = [arr[s], arr[i]];
-//     }
-// }
-
-// getQuestions().then((data) => {
-//     var results = data.results[index];
-//     console.log(results);
-//     document.getElementById('question').innerHTML = results.question;
-//     var answers = [...results.incorrect_answers, results.correct_answer];
-//     randomizeAnswers(answers);
-//     for (var i = 0; i < 4; i++) {
-//         var index = i + 1;
-//         document.getElementById(`choice${index}label`).innerHTML = answers[i];
-//         document.getElementById(`choice${index}`).value = answers[i];
-//     }
-
-//     document.getElementById('guess').addEventListener('click', () => {
-//         document.querySelectorAll('input[name="choice"]').forEach((el) => {
-//             var accuracy = document.getElementById('accuracy');
-//             if(el.checked){
-//                 console.log(el.value);
-//                 console.log(results.correct_answer);
-
-//                 if(el.value === results.correct_answer) {
-//                     accuracy.innerHTML = "Good job!"
-//                 } else accuracy.innerHTML = `Sorry! The correct answer is ${results.correct_answer}`;
-//             } 
-//         });
-//     });
-// });
 
 function renderQuestion(index) {
 
@@ -162,12 +124,12 @@ function renderQuestion(data) {
     // console.log(correctAnswer);
 
     question.innerHTML = `
-        ${data.question} <br> 
-        <span class = "category">Catagory: ${data.category} </span> <br> 
-        <span class = "difficulty">Difficulty: ${data.difficulty} </span>`;
+        <span class = "category is-size-4">Category: ${data.category} </span> <br>
+        <span class = "difficulty is-size-6">Difficulty: ${data.difficulty} </span> <br> 
+        ${data.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
-            <button data-answer="${option}"> ${index + 1}. ${option} </button>
+            <button class="my-6 button is-info is-rounded" data-answer="${option}"> ${index + 1}. ${option} </button>
     `).join('')}`;
 
     
@@ -190,7 +152,7 @@ function renderQuestion(data) {
     
 
         answers.removeEventListener("click", clickCallback)
-        setTimeout(nextQuestion, 2000);
+        setTimeout(nextQuestion, 1000);
         }
     answers.addEventListener("click", clickCallback);
 }
@@ -256,4 +218,3 @@ function endQuiz() {
         saveScore();
     })
 }
-
