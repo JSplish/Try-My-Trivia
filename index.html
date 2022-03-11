@@ -86,14 +86,16 @@
 
     <section id="finalScore">
         <div id="end-screen" class="hide">
-            <div class="container has-text-centered is-size-2 has-text-dark has-text-weight-bold">
+            <div class="container has-text-centered has-text-dark">
                 <button id="play-again" class="hide">Play Again?</button>
-                <p>All Done!</p>
-                <p>Your final score is <span id="end-score"></span>.</p>
-                <p>Enter Name: </p><input type="text" id="initials" placeholder="Name">
+                <p class="is-size-2">All Done!</p>
+                <p class="is-size-4">Your final score is
+                    <span id="end-score"></span></p>
+                <p class="is-size-5 has-text-weight-bold">Enter Your Name: </p>
+                <input class="input is-link m-2 is-rounded" type="text" id="initials" placeholder="Name">
 
                 <div class="container">
-                    <button id="submit" class="button is-info is-rounded is-medium mt-5">FOR GLORY!</button>
+                    <button id="submit" class="button is-info is-rounded is-medium mt-2">FOR GLORY!</button>
                 </div>
 
                 <ul id="highScore">
