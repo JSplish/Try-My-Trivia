@@ -10,16 +10,15 @@
 </head>
 
 
-<body class="has-background-warning @include from tablet">
+<body class="@include from tablet">
 
     <!-- Navbar -->
 
     <nav class="navbar has-background-info-dark">
         <div class="navbar-logo">
-            <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 100px">
+            <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 75px">
 
             <!-- Menu for Mobile -->
-
             <a class="navbar-burger" id="burger">
                 <span></span>
                 <span></span>
@@ -28,13 +27,12 @@
         </div>
 
         <!-- Navbar -->
-
         <div class="navbar-menu" id="nav-links">
             <div class="navbar-end">
                 <a class="navbar-item has-background-info-dark has-text-white" id="help-nav">HELP</a>
                 <div class="hide has-background-info-dark has-text-white" id="instructions">
                     <p class="py-2 pr-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
-                    <p class="py-2 pr-2">Remember each question has a possibility all types of different categories</p>
+                    <p class="py-2 pr-2">Remember each question has a possibility of all types of different categories.</p>
                     <p class="py-2 pr-2">Difficulty is randomized. Medium ?s get double points and Hard ?s get triple points!</p>
                 </div>
                 <!--<a class="navbar-item has-background-primary" id="scores-nav">SCORES</a> -->
@@ -44,46 +42,43 @@
 
 
     <!-- Timer -->
-
-    <div class="has-text-dark has-background-grey-light is-size-1 has-text-centered">
+    <div class="has-text-dark timer-color is-size-2 has-text-centered">
         <div class="timer hide" id="timer-id">Time: <span id="time">0</span></div>
+        <div id="current-score" class="hide"></div>
     </div>
 
-    <section class="section">
-        <div class="container">
-            <div id="start-screen" class="start">
-                <h1 class="title is-size-1 has-text-centered py-6 has-text-weight-bold has-text-dark">
-                    Welcome to Try My Trivia!
-                </h1>
+    <section class="p-4">
+        <!-- <div class="container"> -->
+        <div id="start-screen" class="start">
+            <h1 class="title is-size-1 has-text-centered pb-6 has-text-weight-bold has-text-dark">
+                Welcome to Try My Trivia!
+            </h1>
 
-
-                <div class="subtitle is-size-3 has-text-centered">
-                    <div id="photo"></div>
-                    <p class="py-2" id="randomName"></p>
-                </div>
+            <div class="subtitle is-size-3 has-text-centered">
+                <div id="photo"></div>
+                <p class="py-2" id="randomName"></p>
             </div>
         </div>
+        <!-- </div> -->
     </section>
 
     <!-- Start Trivia Button -->
-
-    <div class="section" id="start-button">
-        <div class="container">
-            <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
-        </div>
+    <div class="p-6" id="start-button">
+        <!-- <div class="container"> -->
+        <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
+        <!-- </div> -->
     </div>
 
 
     <!--Questions and Answers-->
-
     <div class="container has-text-centered is-size-4">
         <div id="question-answers">
             <div id="photoAPI"></div>
-            <h1 id="question" class="has-text-weight-bold has-text-dark"></h1>
-            <div id="answers">
+            <h1 id="question" class="has-text-dark"></h1>
+            <div id="answers" class="">
             </div>
             <h2 id="accuracy" class="hide"></h2>
-            <div id="current-score"></div>
+
         </div>
     </div>
 
@@ -91,19 +86,19 @@
 
     <section id="finalScore">
         <div id="end-screen" class="hide">
-            <div class="container has-text-centered is-size-2 has-text-dark has-text-weight-bold">
+            <div class="container has-text-centered has-text-dark">
                 <button id="play-again" class="hide">Play Again?</button>
-                <p>All Done!</p>
-                <p>Your final score is <span id="end-score"></span>.</p>
-                <p>Enter Name: </p><input type="text" id="initials" placeholder="Name">
+                <p class="is-size-2">All Done!</p>
+                <p class="is-size-4">Your final score is
+                    <span id="end-score"></span></p>
+                <p class="is-size-5 has-text-weight-bold">Enter Your Name: </p>
+                <input class="input is-link m-2 is-rounded" type="text" id="initials" placeholder="Name">
 
                 <div class="container">
-                    <button id="submit" class="button is-info is-rounded is-medium mt-5">FOR GLORY!</button>
+                    <button id="submit" class="button is-info is-rounded is-medium mt-2">FOR GLORY!</button>
                 </div>
 
-
                 <ul id="highScore">
-
                 </ul>
             </div>
     </section>
