@@ -132,7 +132,7 @@ function renderQuestion(questionData) {
         ${questionData.question} `;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
-            <button class="my-6 button is-info is-rounded is-large" data-answer="${option}"> ${index + 1}. ${option} </button>
+            <button class="my-6 button is-info is-rounded is-medium" data-answer="${option}"> ${index + 1}. ${option} </button>
     `).join('')}`;
 
     currentScore.innerHTML = `<span>Your current score is ${points}</span>`;

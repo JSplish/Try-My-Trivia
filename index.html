@@ -10,7 +10,7 @@
 </head>
 
 
-<body class="has-background-warning">
+<body class="has-background-warning @include from tablet">
 
     <!-- Navbar -->
 
@@ -35,7 +35,7 @@
                 <div class="hide has-background-info-dark has-text-white" id="instructions">
                     <p class="py-2">These are 5 of my favorite trivia questions. Do you think you can answer them all?</p>
                     <p class="py-2">Remember each question has a possibility all types of different categories</p>
-                    <p class="py-2">We will start easy but progress in difficulty. Good luck on the last one. You will need it!</p>
+                    <p class="py-2">Difficulty is randomized. Medium ?s get double points and Hard ?s get triple points!</p>
                 </div>
                 <!--<a class="navbar-item has-background-primary" id="scores-nav">SCORES</a> -->
             </div>
@@ -76,7 +76,7 @@
 
     <!--Questions and Answers-->
 
-    <div class="container has-text-centered is-size-2">
+    <div class="container has-text-centered is-size-4">
         <div id="question-answers">
             <div id="photoAPI"></div>
             <h1 id="question" class="has-text-weight-bold has-text-dark"></h1>
