@@ -1,6 +1,7 @@
 body,
 html {
     height: 100%;
+    background-color: #ffdd57;
 }
 
 .hide {
@@ -21,4 +22,8 @@ input {
 
 .show-inline {
     display: inline-block;
+}
+
+.timer-color {
+    background-color: #48b2f8;
 }

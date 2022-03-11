@@ -79,6 +79,7 @@ function startQuiz() {
     questionAnswerEl.setAttribute("class", "show");
 
     timerId.setAttribute("class", "show");
+    currentScore.setAttribute("class", "show is-size-4");
 
     countDown();
 
@@ -240,7 +241,9 @@ function endQuiz() {
 
     timerId.setAttribute("class", "hide");
     
-    endScreen.setAttribute("class", "show")
+    endScreen.setAttribute("class", "show");
+
+    currentScore.setAttribute("class", "hide");
     
     //saveScore();
 

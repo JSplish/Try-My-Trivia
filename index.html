@@ -10,13 +10,13 @@
 </head>
 
 
-<body class="has-background-warning @include from tablet">
+<body class="@include from tablet">
 
     <!-- Navbar -->
 
     <nav class="navbar has-background-info-dark">
         <div class="navbar-logo">
-            <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 100px">
+            <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 75px">
 
             <!-- Menu for Mobile -->
 
@@ -45,8 +45,9 @@
 
     <!-- Timer -->
 
-    <div class="has-text-dark has-background-grey-light is-size-1 has-text-centered">
+    <div class="has-text-dark timer-color is-size-2 has-text-centered">
         <div class="timer hide" id="timer-id">Time: <span id="time">0</span></div>
+        <div id="current-score" class="hide"></div>
     </div>
 
     <section class="section">
@@ -83,7 +84,7 @@
             <div id="answers">
             </div>
             <h2 id="accuracy" class="hide"></h2>
-            <div id="current-score"></div>
+
         </div>
     </div>
 
