@@ -225,7 +225,7 @@ function displayScores() {
     savedScores = JSON.parse(savedScores);
     for (var i = 0; i < savedScores.length; i++) {
         var li = document.createElement("li");
-        li.setAttribute("class","has-text-weight-normal is-size-");
+        li.setAttribute("class","is-size-5");
         li.textContent = savedScores[i].initials + " - " + savedScores[i].points + " points";
         document.getElementById("highScore").appendChild(li);
     }
