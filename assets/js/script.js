@@ -95,7 +95,7 @@ var personImage;
 async function getRandomUser() {
     const result = await fetch(apiUrl);
     data = await result.json();
-    console.log(data.results);
+    // console.log(data.results);
 
     data.results.forEach(person => {
         personImage = person.picture.large;
@@ -113,7 +113,7 @@ async function sendRequest() {
     const apiUrl = 'https://opentdb.com/api.php?amount=5';
     const result = await fetch(apiUrl);
     questions = await result.json();
-    console.log(questions.results);
+    // console.log(questions.results);
     renderQuestion(questions.results[index]);
 }
 //load open trivia api data
@@ -141,40 +141,40 @@ function renderQuestion(questionData) {
     var clickCallback = function(event) {
         //console.log(incorrectList)
         var checkAnswer = event.target.dataset.answer;
-        console.log(event.target);
+        // console.log(event.target);
         if (correctAnswer === checkAnswer) {
-            console.log("Correct!");
+            // console.log("Correct!");
             
             if (questionData.difficulty === "medium"){
-                points = timeSeconds * 2;
-                console.log("2x pts");
+                points = points + timeSeconds * 2;
+                // console.log("2x pts");
             }
             else if (questionData.difficulty === "hard"){
-                points = timeSeconds * 3;
-                console.log("3x pts");
+                points = points + timeSeconds * 3;
+                // console.log("3x pts");
             }
             else {
                 points = points + timeSeconds;
-                console.log("1x points");
             }
+            
             
             currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
             //return points;
             // console.log(points);
-            document.getElementById("accuracy").innerHTML="WOWZERS! You are smart! 😃 ";
+            accuracy.innerHTML="WOWZERS! You are smart! 😃 ";
 
         } else {
-            console.log("Incorrect!")
-            document.getElementById("accuracy").innerHTML="Incorrect! 🤪 The correct answer is " + correctAnswer;
+            // console.log("Incorrect!")
+            accuracy.innerHTML="Incorrect! 🤪 The correct answer is " + correctAnswer;
         }
-        
-        accuracy.setAttribute("class", "show");
     
-
+        accuracy.setAttribute("class", "mt-auto show");
+    
         answers.removeEventListener("click", clickCallback);
         setTimeout(nextQuestion, 1500);
     }
     answers.addEventListener("click", clickCallback);
+    console.log(points);
 }
 
     // setTimeout(function(){
@@ -211,12 +211,13 @@ function saveScore() {
             return 0
         }
     });
-console.log(mostRecentLast10Scores);
+// console.log(mostRecentLast10Scores);
      mostRecentLast10Scores = mostRecentLast10Scores.slice(0,10);
     localStorage.setItem("finalScore", JSON.stringify(mostRecentLast10Scores));
-    console.log(mostRecentLast10Scores);
+    // console.log(mostRecentLast10Scores);
     displayScores();
-    submitButton.disabled = true;
+    submitButton.setAttribute("class", "hide");
+    initials.disabled = true;
 }
 
 function displayScores() {
