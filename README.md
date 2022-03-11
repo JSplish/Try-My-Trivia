@@ -10,13 +10,13 @@ In this trivia challenge users will put their knowledge to the test by attemptin
 ## Links
 
 ## Screenshots
-<img src="./assets/images/homepage.jpg>
+<img src="./assets/images/homepage.jpg">
 
-<img src="./assets/images/question1.jpg>
+<img src="./assets/images/question1.jpg">
 
-<img src="./assets/images/question2.jpg>
+<img src="./assets/images/question2.jpg">
 
-<img src="./assets/images/highscore.jpg>
+<img src="./assets/images/highscore.jpg">
 
 ## Website made using
 * HTML
