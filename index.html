@@ -19,7 +19,6 @@
             <img src="./assets/images/trivia-logo.png" alt="Trivia Logo" style="max-height: 75px">
 
             <!-- Menu for Mobile -->
-
             <a class="navbar-burger" id="burger">
                 <span></span>
                 <span></span>
@@ -28,7 +27,6 @@
         </div>
 
         <!-- Navbar -->
-
         <div class="navbar-menu" id="nav-links">
             <div class="navbar-end">
                 <a class="navbar-item has-background-info-dark has-text-white" id="help-nav">HELP</a>
@@ -44,39 +42,35 @@
 
 
     <!-- Timer -->
-
     <div class="has-text-dark timer-color is-size-2 has-text-centered">
         <div class="timer hide" id="timer-id">Time: <span id="time">0</span></div>
         <div id="current-score" class="hide"></div>
     </div>
 
-    <section class="section">
-        <div class="container">
-            <div id="start-screen" class="start">
-                <h1 class="title is-size-1 has-text-centered py-6 has-text-weight-bold has-text-dark">
-                    Welcome to Try My Trivia!
-                </h1>
+    <section class="p-4">
+        <!-- <div class="container"> -->
+        <div id="start-screen" class="start">
+            <h1 class="title is-size-1 has-text-centered pb-6 has-text-weight-bold has-text-dark">
+                Welcome to Try My Trivia!
+            </h1>
 
-
-                <div class="subtitle is-size-3 has-text-centered">
-                    <div id="photo"></div>
-                    <p class="py-2" id="randomName"></p>
-                </div>
+            <div class="subtitle is-size-3 has-text-centered">
+                <div id="photo"></div>
+                <p class="py-2" id="randomName"></p>
             </div>
         </div>
+        <!-- </div> -->
     </section>
 
     <!-- Start Trivia Button -->
-
-    <div class="section" id="start-button">
-        <div class="container">
-            <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
-        </div>
+    <div class="p-6" id="start-button">
+        <!-- <div class="container"> -->
+        <button class="button is-info is-large is-fullwidth is-rounded has-text-centered">Start Try My Trivia</button>
+        <!-- </div> -->
     </div>
 
 
     <!--Questions and Answers-->
-
     <div class="container has-text-centered is-size-4">
         <div id="question-answers">
             <div id="photoAPI"></div>
@@ -102,9 +96,7 @@
                     <button id="submit" class="button is-info is-rounded is-medium mt-5">FOR GLORY!</button>
                 </div>
 
-
                 <ul id="highScore">
-
                 </ul>
             </div>
     </section>
