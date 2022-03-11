@@ -128,12 +128,12 @@ function renderQuestion(questionData) {
     // console.log(incorrectList);
     photoAPI.innerHTML = `<img src="${personImage}">`;
     question.innerHTML = `
-        <span class = "category is-size-3">Category - ${questionData.category} </span> <br>
-        <span class = "difficulty is-size-3 is-capitalized">Difficulty - ${questionData.difficulty} </span> <br> <hr class="has-background-dark">
-        ${questionData.question} `;
+        <span class = "category is-size-4">Category - ${questionData.category} </span> <br>
+        <span class = "difficulty is-size-4 is-capitalized mb-1">Difficulty - ${questionData.difficulty} </span> <br> <hr class="has-background-dark">
+        <span class="is-size-3 has-text-weight-bold">${questionData.question} </span>`;
     answers.innerHTML = `
         ${incorrectList.map((option, index) => `
-            <button class="my-6 button is-info is-rounded is-medium" data-answer="${option}"> ${index + 1}. ${option} </button>
+            <button class="mt-3 button is-info is-rounded is-medium" data-answer="${option}"> ${index + 1}. ${option} </button>
     `).join('')}`;
 
     currentScore.innerHTML = `<span>Your current score is ${points}</span>`;
