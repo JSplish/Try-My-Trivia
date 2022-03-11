@@ -1,0 +1,24 @@
+body,
+html {
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+input {
+    text-align: center;
+    border-radius: 10px;
+    height: 50px;
+    width: 200px;
+    font-size: large;
+}
+
+.show-inline {
+    display: inline-block;
+}
