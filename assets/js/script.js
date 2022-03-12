@@ -113,6 +113,7 @@ async function sendRequest() {
     const apiUrl = 'https://opentdb.com/api.php?amount=5';
     const result = await fetch(apiUrl);
     questions = await result.json();
+
     // console.log(questions.results);
     renderQuestion(questions.results[index]);
 }
@@ -169,7 +170,7 @@ function renderQuestion(questionData) {
         }
     
         accuracy.setAttribute("class", "mt-auto show is-size-5-mobile is-size-4-tablet");
-        debugger
+        // debugger
     
         answers.removeEventListener("click", clickCallback);
         setTimeout(nextQuestion, 1500);
