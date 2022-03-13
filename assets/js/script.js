@@ -78,7 +78,8 @@ function startQuiz() {
     //un-hide questions section
     questionAnswerEl.setAttribute("class", "show");
 
-    timerId.setAttribute("class", "show");
+    timerId.classList.remove("hide");
+
     currentScore.setAttribute("class", "show is-size-4");
 
     countDown();
